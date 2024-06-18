@@ -1,0 +1,49 @@
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Detail CLUB</title>
+</head>
+<body class="d-flex flex-column h-100">
+    <section layout:fragment="body">
+        <header class="py-5 bg-light border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder" th:text="${club.title}"></h1>
+                    <p class="lead mb-0">A</p>
+                </div>
+            </div>
+        </header>
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <!-- Blog Entries -->
+                <div class="col-lg-8">
+                    <!-- Feature blog post -->
+                    <div class="card mb-4">
+                        <a href="#!"><img class="card-img-top" th:src="${club.photoUrl}" alt="..." /></a>
+                        <div class="card-body">
+                            <div class="small text-muted" th:text="${club.createdOn}"></div>
+                            <h2 class="card-title">About this CLUB</h2>
+                            <p class="card-text" th:text="${club.content}">L</p>
+                            <a class="btn btn-primary">Delete</a>
+                        </div>
+                    </div>
+                    <!-- Nestd row for non-featured blog post -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!--Blog Post-->
+                            <div class="card mb-4">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</body>
+</html>

@@ -24,25 +24,28 @@
                                name="title"
                                th:field="*{title}"
                                placeholder="Title for your Club">
+                        <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="photo">Photourl</label>
+                        <label for="photoUrl">Photourl</label>
                         <input type="text"
                                class="form-control"
-                               id="photo"
-                               name="title"
+                               id="photoUrl"
+                               name="photoUrl"
                                th:field="*{photoUrl}"
                                placeholder="URL for the picture of your club">
+                        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="Content">Content</label>
                     <input type="text"
                            class="form-control"
-                           id="Content"
+                           id="content"
                            name="content"
                            th:field="*{content}"
                            placeholder="A brief description of your club">
+                    <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

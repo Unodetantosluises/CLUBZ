@@ -16,22 +16,24 @@
             </div>
             <div class="row gx-5">
                 <div th:each="club : ${clubs}" class="col-lg-6 mb-2">
-                    <div class="position-relative mb-3">
+                    <div class="position-relative">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..." />
                         <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Club name</a>
+                        <p th:text="${club.content}" class="font-weight-light text-decoration-none">Club content</p>
                     </div>
+                    <a class="btn btn-info" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">About</a>
                     <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit Club</a>
                 </div>
             </div>
         </div>
+        <section class="py-5 bg-light">
+            <div class="container px-5 my-5">
+                <h2 class="display-4 fw-bolder">Tons of clubz, Join us o create your Own</h2>
+                <a class="btn btn-lg btn-primary" href="#!">See all CLUBZ</a>
+                <a class="btn btn-lg btn-primary" th:href="@{clubs/new}">Creat your Own CLUB</a>
+            </div>
+        </section>
     </section>
 </main>
 </body>
-<section class="py-5 bg-light">
-    <div class="container px-5 my-5">
-        <h2 class="display-4 fw-bolder mb-4">Tons of clubz, Join us o create your Own</h2>
-        <a class="btn btn-lg btn-primary" href="#!">See all CLUBZ</a>
-        <a class="btn btn-lg btn-primary" th:href="@{clubs/new}">Creat your Own CLUB</a>
-    </div>
-</section>
 </html>
