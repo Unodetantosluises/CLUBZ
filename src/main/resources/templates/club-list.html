@@ -11,10 +11,15 @@
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
-                <h1 class="fw-bolder">CLUBZ We Think You Club Love</h1>
+                <h1 class="fw-bolder">CLUBZ We Think You Club on o </h1>
                 <p class="lead fw-normal text-muted mb-0">Trending, New, Underground</p>
             </div>
             <div class="row gx-5">
+                <div>
+                    <form  th:action="@{/clubs/search}" class="form-inline my-2 my-lg-0 mb-3">
+                        <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search CLUBZ" aria-label="Search">
+                    </form>
+                </div>
                 <div th:each="club : ${clubs}" class="col-lg-6 mb-2">
                     <div class="position-relative">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..." />
