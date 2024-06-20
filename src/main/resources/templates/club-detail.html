@@ -35,51 +35,16 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <!--Blog Post-->
-                            <div class="card mb-4">
-                                <a href="#"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."></a>
+                            <div th:each="event :${club.events}" class="card mb-4">
+                                <a href="#"><img class="card-img-top" th:src="${event.photoUrl}" alt="..."></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">June 19 2024</div>
-                                    <h2 class="card-title h4">Event Title</h2>
-                                    <p class="card-text">Event Text</p>
+                                    <div th:text="${event.createdOn}" class="small text-muted"></div>
+                                    <h2 th:text="${event.name}" class="card-title h4"></h2>
+                                    <p th:text="${event.type}" class="card-text"></p>
                                     <a class="btn btn-primary" href="#">Read more</a>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Blog Post -->
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <a href="#"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">June 19 2024</div>
-                                    <h2 class="cad-title h4">Event Title</h2>
-                                    <p class="card-text">Event Text</p>
-                                    <a class="btn btn-primary" href="#">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog Post-->
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <a href="#"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">June 19 2024</div>
-                                    <h2 class="card-title h4">Event Title</h2>
-                                    <p class="card-text">Event Text</p>
-                                    <a class="btn btn-primary" href="#">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Blog Post -->
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <a href="#"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">June 19 2024</div>
-                                    <h2 class="cad-title h4">Event Title</h2>
-                                    <p class="card-text">Event Text</p>
-                                    <a class="btn btn-primary" href="#">Read more</a>
-                                </div>
-                            </div>
+                            <!-- Blog Post -->
                         </div>
                     </div>
                     <!-- Pagination -->
@@ -130,7 +95,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 </body>
 </html>
