@@ -1,6 +1,7 @@
 package com.rungroup.web.service.impl;
 
 import com.rungroup.web.dto.EventDto;
+import com.rungroup.web.excepcions.ResourceNotFoundException;
 import com.rungroup.web.models.Club;
 import com.rungroup.web.models.Event;
 import com.rungroup.web.repository.ClubRepository;
