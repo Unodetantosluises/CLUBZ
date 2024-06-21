@@ -21,6 +21,7 @@
                         <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search CLUBZ" aria-label="Search">
                     </form>
                 </div>
+                <!-- Clubs -->
                 <div th:each="club : ${clubs}" class="col-lg-6 mb-2">
                     <div class="position-relative">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..." />
@@ -30,6 +31,7 @@
                     <a class="btn btn-info" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>
                     <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit Club</a>
                 </div>
+                <!-- Clubs -->
             </div>
         </div>
         <section class="py-5 bg-light">

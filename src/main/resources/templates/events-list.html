@@ -28,12 +28,18 @@
                         <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
                         <p th:text="${event.type}" class="font-weight-light text-decoration-none"></p>
                     </div>
-                    <a class="btn btn-primary">View</a>
-                    <a class="btn btn-primary">Edit Event</a>
+                    <a class="btn btn-info" th:href="@{/events/{eventId}(eventId=${event.id})}">View</a>
+                    <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit Event</a>
                 </div>
                 <!-- Events -->
             </div>
         </div>
+        <section class="py-5 bg-light">
+            <div class="container px-5 my-5">
+                <h2 class="display-4 fw-bolder">Events</h2>
+                <a class="btn btn-lg btn-primary" th:href="@{clubs}">Join a CLUB</a>
+            </div>
+        </section>
     </section>
 </main>
 </body>
