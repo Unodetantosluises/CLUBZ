@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
@@ -31,4 +32,20 @@ public class EventDto {
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
+
+    public String getFormattedStartTime(){
+        return formatDateTime(startTime);
+    }
+
+    public String getFormattedEndTime(){
+        return  formatDateTime(endTime);
+    }
+
+    private String formatDateTime(LocalDateTime dateTime){
+        if (dateTime != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+            return dateTime.format(formatter);
+        }
+        return "";
+    }
 }
