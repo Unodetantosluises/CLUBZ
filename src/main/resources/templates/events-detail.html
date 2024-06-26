@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
                             <p class="card-text mb-0">Event Created on: </p>
-                            <p class="small text-muted mb-0" th:text="${event.createdOn}"></p>
+                            <p class="small text-muted mb-0" th:text="${event.formattedCreatedOn}"></p>
                         </div>
                         <h2 class="card-title">About this Event</h2>
                         <p class="card-text" th:text="${event.type}"></p>
@@ -39,7 +39,7 @@
                             <p class="card-text mb-0" th:text="${event.formattedEndTime}"></p>
                         </div>
                         <p class="cart-text">Description of the Event</p>
-                        <a class="btn btn-info" th:href="@{/events/{eventId}(eventId=${event.id})}">Edit Event</a>
+                        <a class="btn btn-info" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit Event</a>
                         <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete Event</a>
                     </div>
                 </div>

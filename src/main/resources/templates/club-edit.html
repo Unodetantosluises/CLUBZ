@@ -15,7 +15,7 @@
                 <p class="lead fw-normal text-muted mb-0">Change the information of a CLUB</p>
             </div>
             <form role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}">
-                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{id}" >
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="title">Title</label>
@@ -28,13 +28,13 @@
                         <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="photoUrl">Photourl</label>
+                        <label for="photoUrl">Url of Photo</label>
                         <input type="text"
                                class="form-control"
                                id="photoUrl"
                                name="photoUrl"
                                th:field="*{photoUrl}"
-                               placeholder="URL for the picture of your club">
+                               placeholder="URL for the photo of your club">
                         <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
                     </div>
                 </div>

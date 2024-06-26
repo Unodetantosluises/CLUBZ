@@ -1,6 +1,10 @@
 package com.rungroup.web.dto;
 
+import com.rungroup.web.models.Club;
+
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,20 +22,37 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class EventDto {
     private Long id;
+
     @NotEmpty(message = "Event Name should not be Empty")
     private String name;
+
+    @NotNull(message = "Start Time should not be Empty")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @FutureOrPresent(message = "Start Time should be in the future or present")
     private LocalDateTime startTime;
+
+    @NotNull(message = "End Time should not be Empty")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @FutureOrPresent(message = "End Time should be in the future or present")
     private LocalDateTime endTime;
+
     @NotEmpty(message = "Event Type should not be Empty")
     private String type;
+
     @NotEmpty(message = "Event Photo Link should not be Empty")
     private String photoUrl;
+
     @CreationTimestamp
     private LocalDateTime createdOn;
+
     @UpdateTimestamp
     private LocalDateTime updatedOn;
+
+    private Club club;
+
+    public String getFormattedCreatedOn() {
+        return formatDateTime(createdOn);
+    }
 
     public String getFormattedStartTime(){
         return formatDateTime(startTime);

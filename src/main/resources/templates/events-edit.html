@@ -11,10 +11,10 @@
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
-                <h1 class="fw-bolder">Event Edit</h1>
+                <h1 class="fw-bolder">Edit Event</h1>
                 <p class="lead fw-normal text-muted mb-0">Change the information of the Event</p>
             </div>
-            <form role="form" method="post" th:action="@{/events/{eventId}/edit(eventId=${event.id})}" th:object="${event}">
+            <form role="form" method="post" th:action="@{/events/{eventId}/edit(eventId=${eventId})}" th:object="${event}">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="photoUrl">Url Photo</label>
+                    <label for="photoUrl">Url of Photo</label>
                     <input type="text"
                            class="form-control"
                            id="photoUrl"
@@ -55,8 +55,8 @@
                            id="startTime"
                            name="startTime"
                            th:field="*{startTime}"
-                           placeholder="Url for the photo of your Event">
-                    <!--<p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>-->
+                           placeholder="Start time of your Event">
+                    <p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"></p>
                 </div>
                 <div class="form-group mb-3">
                     <label for="endTime">End Time of Your Event</label>
@@ -65,8 +65,8 @@
                            id="endTime"
                            name="endTime"
                            th:field="*{endTime}"
-                           placeholder="Url for the photo of your Event">
-                    <!--<p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>-->
+                           placeholder="End time of your Event">
+                    <p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Edit</button>
             </form>

@@ -1,6 +1,7 @@
 package com.rungroup.web.controller;
 
 import com.rungroup.web.dto.ClubDto;
+import com.rungroup.web.dto.EventDto;
 import com.rungroup.web.models.Club;
 import com.rungroup.web.service.ClubService;
 import jakarta.validation.Valid;

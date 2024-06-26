@@ -43,7 +43,8 @@
                                     <div th:text="${event.createdOn}" class="small text-muted"></div>
                                     <h2 th:text="${event.name}" class="card-title h4"></h2>
                                     <p th:text="${event.type}" class="card-text"></p>
-                                    <a class="btn btn-primary" href="#">Read more</a>
+                                    <a class="btn btn-info" th:href="@{/events/{eventId}(eventId=${event.id})}">Event Details</a>
+                                    <a class="btn btn-success" href="#">Join event!</a>
                                 </div>
                             </div>
                             <!-- Events -->
