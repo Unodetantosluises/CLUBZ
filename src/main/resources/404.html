@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 Not Found</title>
+</head>
+<body>
+<h3>404 Not Found</h3>
+    <h1 th:text="${errorCode}">404</h1>
+    <p th:text="${errorMessage}">Error java.lang.NullPointerException</p>
+    <a href="/" th:href="@{/clubs}">Back to Home Page</a>
+</body>
+</html>

@@ -29,7 +29,7 @@
                             <p class="small text-muted mb-0" th:text="${event.formattedCreatedOn}"></p>
                         </div>
                         <h2 class="card-title">About this Event</h2>
-                        <p class="card-text" th:text="${event.type}"></p>
+                        <a class="badge rounded-pill text-bg-info text-decoration-none link-light" th:text="${event.type}"></a>
                         <div class="d-flex align-items-center gap-2">
                             <p class="card-text mb-0">Start time of the Event: </p>
                             <p class="card-text mb-0" th:text="${event.formattedStartTime}"></p>
@@ -38,7 +38,7 @@
                             <p class="card-text mb-0">End time of the Event: </p>
                             <p class="card-text mb-0" th:text="${event.formattedEndTime}"></p>
                         </div>
-                        <p class="cart-text">Description of the Event</p>
+                        <p class="cart-text">Description of the Event: </p>
                         <a class="btn btn-info" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit Event</a>
                         <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete Event</a>
                     </div>
@@ -75,6 +75,10 @@
                 <div class="card mb-4">
                     <div class="card-header">Side Widget</div>
                     <div class="card-body">You</div>
+                </div>
+                <!--Button -->
+                <div class="d-grid gap-2 col-6">
+                    <a class="btn btn-primary" th:href="@{/events}">Return to Events</a>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@
                     <!-- Club Info -->
                     <!-- Club -->
                     <!-- Nested row for the Events of a Club-->
-                    <div class="row">
+                    <div class="row gx-5">
                         <div class="col-lg-6">
                             <!--Events-->
                             <div th:each="event :${club.events}" class="card mb-4">
@@ -95,6 +95,10 @@
                     <div class="card mb-4">
                         <div class="card-header">Side Widget</div>
                         <div class="card-body">You</div>
+                    </div>
+                    <!--Button -->
+                    <div class="d-grid gap-2 col-6">
+                        <a class="btn btn-secondary" th:href="@{/clubs}">Return to Clubz</a>
                     </div>
                 </div>
             </div>
