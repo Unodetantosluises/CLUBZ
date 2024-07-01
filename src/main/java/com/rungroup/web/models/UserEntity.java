@@ -21,10 +21,12 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
     private String name;
     private String lastName;
     private String password;
     private String email;
+    private String profilePhoto;
     private Boolean active;
     @CreationTimestamp
     private LocalDateTime createdOn;
