@@ -25,9 +25,6 @@ public class RegistrationDto {
     @NotEmpty(message = "Email should not be empty.")
     private String email;
 
-    @NotEmpty(message = "Please upload a Photo for your profile.")
-    private String profilePhoto;
-
     private Boolean active;
 
     @CreationTimestamp

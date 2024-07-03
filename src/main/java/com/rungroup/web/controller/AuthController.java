@@ -30,15 +30,15 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("user") RegistrationDto user, BindingResult result, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
         if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty())
-            result.rejectValue("email", "Theres is alreday a uss qih that email.");
-        UserEntity exisingUserUsername = userService.findByUsername(user.getUsername());
-        if (existingUserUsername != null && existingUserUsername.getUserName() != null && !existingUserUsername.getUsername().isEmpty())
-            result.rejectValue("username", "Theres is alreday a uss qih that email.");
+            result.rejectValue("email", "Theres is already an user with that email.");
+        UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
+        if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty())
+            result.rejectValue("username", "Theres is already an user with that username.");
         if(result.hasErrors()){
             model.addAttribute("user", user);
-            return "resgister";
+            return "register";
         }
         userService.saveUser(user);
-        return "redirect:/clubs?successs";
+        return "redirect:/clubs?successes";
     }
 }
