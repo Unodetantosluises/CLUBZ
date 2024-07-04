@@ -13,7 +13,7 @@
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">Events</h1>
                 <h3 class="fw-bolder">Tons of Events, Tons of Experience, Tons of Fun</h3>
-                <p class="lead fw-normal text-muted mb-0">Find New Events and Current Events</p>
+                <p class="lead fw-normal text-muted mb-0">Find New and Current Events</p>
             </div>
             <div class="row gx-5">
                 <div>
@@ -28,7 +28,7 @@
                             <img class="img-fluid h-100 w-100 rounded-3" th:src="${event.photoUrl}" alt="..." style="object-fit:cover;" />
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${event.name}"></h5>
+                            <h3 class="card-title" th:text="${event.name}"></h3>
                             <p class="card-text" th:text="${event.type}"></p>
                             <a class="btn btn-info" th:href="@{/events/{eventId}(eventId=${event.id})}">View</a>
                             <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit Event</a>

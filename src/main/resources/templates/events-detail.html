@@ -7,7 +7,7 @@
 </head>
 <body class="d-flex flex-column">
 <section layout:fragment="body">
-    <header class="py-5 bg-light border-bottom mb-4">
+    <header class="py-5 bg-light border-bottom mb-4" th:style="'background-image: url(' + ${event.photoUrl} + '); background-size: cover; background-position: center;'">
         <div class="container">
             <div class="text-center my-5">
                 <h1 class="fw-bolder" th:text="${event.name}"></h1>
@@ -18,9 +18,7 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <!-- Blog Entries -->
             <div class="col-lg-8">
-                <!-- Feature blog post -->
                 <div class="card mb-4">
                     <a href="#"><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
                     <div class="card-body">
@@ -78,7 +76,7 @@
                 </div>
                 <!--Button -->
                 <div class="d-grid gap-2 col-6">
-                    <a class="btn btn-primary" th:href="@{/events}">Return to Events</a>
+                    <a class="btn btn-secondary" th:href="@{/events}">Return to Events</a>
                 </div>
             </div>
         </div>

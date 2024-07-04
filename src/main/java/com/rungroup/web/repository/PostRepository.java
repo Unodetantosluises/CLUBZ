@@ -12,4 +12,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<Post> findByTitle(String url);
     @Query("SELECT p FROM Post p WHERE p.title LIKE CONCAT('%', :query, '%')")
     List<Post> searchPosts(String query);
+
+    List<Post> findAllByOrderByCreatedOnAsc();
 }

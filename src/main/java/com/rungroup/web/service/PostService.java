@@ -8,4 +8,6 @@ public interface PostService {
     List<PostDto> findAllPosts();
 
     List<PostDto> searchPosts(String query);
+
+    List<PostDto> getAllPosts();
 }

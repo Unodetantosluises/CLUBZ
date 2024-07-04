@@ -2,6 +2,7 @@ package com.rungroup.web.service.impl;
 
 import com.rungroup.web.dto.EventDto;
 import com.rungroup.web.excepcions.ResourceNotFoundException;
+import com.rungroup.web.mapper.EventMapper;
 import com.rungroup.web.models.Club;
 import com.rungroup.web.models.Event;
 import com.rungroup.web.repository.ClubRepository;
@@ -62,5 +63,13 @@ public class EventServiceImpl implements EventService {
     public List<EventDto> searchEvents(String query) {
         List<Event> events = eventRepository.searchEvents(query);
         return events.stream().map(event -> mapToEventDto(event)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventDto> getAllEvents() {
+        List<Event> events = eventRepository.findAllByOrderByCreatedOnAsc();
+        return events.stream()
+                .map(EventMapper::mapToEventDto)
+                .collect(Collectors.toList());
     }
 }

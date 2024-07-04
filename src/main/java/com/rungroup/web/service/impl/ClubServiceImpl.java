@@ -1,6 +1,7 @@
 package com.rungroup.web.service.impl;
 
 import com.rungroup.web.dto.ClubDto;
+import com.rungroup.web.mapper.ClubMapper;
 import com.rungroup.web.models.Club;
 import com.rungroup.web.repository.ClubRepository;
 import com.rungroup.web.service.ClubService;
@@ -55,5 +56,13 @@ public class ClubServiceImpl implements ClubService {
     public List<ClubDto> searchClubs(String query) {
         List<Club> clubs = clubRepository.searchClubs(query);
         return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClubDto> getAllClubs() {
+        List<Club> clubs = clubRepository.findAllByOrderByCreatedOnAsc();
+        return clubs.stream()
+                .map(ClubMapper::mapToClubDto)
+                .collect(Collectors.toList());
     }
 }

@@ -24,7 +24,10 @@
                     <div class="card mb-4">
                         <a href="#"><img class="card-img-top" th:src="${club.photoUrl}" alt="..." /></a>
                         <div class="card-body">
-                            <div class="small text-muted" th:text="${club.createdOn}"></div>
+                            <div class="d-flex align-items-center gap-2">
+                                <p class="card-text mb-0">Club Created on: </p>
+                                <p class="small text-muted mb-0" th:text="${club.formattedCreatedOn}"></p>
+                            </div>
                             <h2 class="card-title">About this CLUB</h2>
                             <p class="card-text" th:text="${club.content}"></p>
                             <a class="btn btn-danger" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete</a>
@@ -32,13 +35,12 @@
                         </div>
                     </div>
                     <!-- Club Info -->
-                    <!-- Club -->
                     <!-- Nested row for the Events of a Club-->
-                    <div class="row gx-5">
-                        <div class="col-lg-6">
-                            <!--Events-->
-                            <div th:each="event :${club.events}" class="card mb-4">
-                                <a href="#"><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
+                    <div class="row">
+                            <div th:each="event :${club.events}" class="col-lg-6 mb-4">
+                                <div class="card-img-top" style="height: 400px; overflow: hidden;">
+                                    <img class="card-img-top" th:src="${event.photoUrl}" alt="..." />
+                                </div>
                                 <div class="card-body">
                                     <div th:text="${event.createdOn}" class="small text-muted"></div>
                                     <h2 th:text="${event.name}" class="card-title h4"></h2>
@@ -46,7 +48,6 @@
                                     <a class="btn btn-info" th:href="@{/events/{eventId}(eventId=${event.id})}">Event Details</a>
                                     <a class="btn btn-success" href="#">Join event!</a>
                                 </div>
-                            </div>
                             <!-- Events -->
                         </div>
                     </div>

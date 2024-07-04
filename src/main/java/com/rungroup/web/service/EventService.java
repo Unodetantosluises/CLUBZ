@@ -16,4 +16,6 @@ public interface EventService {
     void updateEvent(EventDto eventDto);
 
     List<EventDto> searchEvents(String query);
+
+    List<EventDto> getAllEvents();
 }

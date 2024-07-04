@@ -32,7 +32,7 @@
                             placeholder="Email"
                             th:field="*{email}">
                     </div>
-                    <p th:if="${fields.hasErrors('email')}" class="text-danger"></p>
+                    <p th:if="${#fields.hasErrors('email')}" class="text-danger"></p>
                     <div class="form-group">
                         <label>Password</label>
                         <input
@@ -41,6 +41,9 @@
                             placeholder="Password"
                             th:field="*{password}">
                     </div>
+                    <p th:if="${#fields.hasErrors('password')}" class="text-danger"></p>
+                    <button th:ref="@{/login}" type="submit" class="btn btn-black">Login</button>
+                    <button type="submit" class="btn btn-secondary">Register</button>
                 </form>
             </div>
         </div>

@@ -12,4 +12,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Optional<Event> findByName(String url);
     @Query("SELECT e FROM Event e WHERE e.name LIKE CONCAT('%', :query, '%')")
     List<Event> searchEvents(String query);
+
+    List<Event> findAllByOrderByCreatedOnAsc();
 }

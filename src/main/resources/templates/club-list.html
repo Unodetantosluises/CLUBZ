@@ -23,13 +23,17 @@
                 </div>
                 <!-- Clubs -->
                 <div th:each="club : ${clubs}" class="col-lg-6 mb-2">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..." />
-                        <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Club name</a>
-                        <p th:text="${club.content}" class="font-weight-light text-decoration-none">Club content</p>
+                    <div class="card mb-3">
+                        <div class="card-img-top" style="height: 300px; overflow: hidden;">
+                            <img class="img-fluid h-100 w-100 rounded-3" th:src="${club.photoUrl}" alt="..." style="object-fit:cover;" />
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title" th:text="${club.title}">Club name</h3>
+                            <p class="card-text" th:text="${club.content}">Club content</p>
+                            <a class="btn btn-info" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>
+                            <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit Club</a>
+                        </div>
                     </div>
-                    <a class="btn btn-info" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>
-                    <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit Club</a>
                 </div>
                 <!-- Clubs -->
             </div>
