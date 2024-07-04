@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostService {
     List<PostDto> findAllPosts();
+
+    List<PostDto> searchPosts(String query);
 }

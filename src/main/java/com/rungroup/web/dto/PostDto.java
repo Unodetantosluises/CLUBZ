@@ -1,7 +1,5 @@
 package com.rungroup.web.dto;
 
-import com.rungroup.web.models.Category;
-
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -44,7 +42,7 @@ public class PostDto {
     private Set<String> categories;
 
     public String getFormattedCreatedOn(){
-        return  formatDateTime(createdOn);
+        return formatDateTime(createdOn);
     }
 
     public String getFormattedUpdatedOn(){

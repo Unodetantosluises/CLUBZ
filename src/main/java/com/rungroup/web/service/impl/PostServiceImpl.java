@@ -4,6 +4,7 @@ import com.rungroup.web.dto.PostDto;
 import com.rungroup.web.models.Post;
 import com.rungroup.web.repository.PostRepository;
 import com.rungroup.web.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,18 @@ import static com.rungroup.web.mapper.PostMapper.mapToPostDto;
 public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
+    @Autowired
+    public PostServiceImpl(PostRepository postRepository){this.postRepository = postRepository;}
+
     @Override
     public List<PostDto> findAllPosts(){
         List<Post> posts = postRepository.findAll();
+        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDto> searchPosts(String query) {
+        List<Post> posts = postRepository.searchPosts(query);
         return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
     }
 }
