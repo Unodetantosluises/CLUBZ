@@ -13,6 +13,9 @@
             <div th:if="${param.success}" class="alert alert-success">
                 You're register successfully!
             </div>
+            <div th:if="${param.fail}" class="alert alert-danger">
+                Username or email already exits
+            </div>
             <div class="login-form">
                 <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
                     <div class="form-group">
