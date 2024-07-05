@@ -3,16 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>User Registration</title>
+    <title>Registration</title>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
-        <div th:if="${param.success}" class="alert alert-success">
-            Youre register suceessfully!
-        </div>
         <div class="col-md-6 col-m-12">
+            <div th:if="${param.success}" class="alert alert-success">
+                You're register successfully!
+            </div>
             <div class="login-form">
                 <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
                     <div class="form-group">
@@ -42,8 +42,8 @@
                             th:field="*{password}">
                     </div>
                     <p th:if="${#fields.hasErrors('password')}" class="text-danger"></p>
-                    <button th:ref="@{/login}" type="submit" class="btn btn-black">Login</button>
-                    <button type="submit" class="btn btn-secondary">Register</button>
+                    <button th:href="@{/login}" type="submit" class="btn btn-black">Login</button>
+                    <button th:href="@{/register}" type="submit" class="btn btn-secondary">Register</button>
                 </form>
             </div>
         </div>

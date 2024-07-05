@@ -38,7 +38,7 @@ public class EventController {
 
 
     @PostMapping("/events/{clubId}")
-    public String createEvent(@Valid @PathVariable("clubId") Long clubId, @ModelAttribute("event") EventDto eventDto, BindingResult result, Model model){
+    public String createEvent(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("event") EventDto eventDto, BindingResult result, Model model){
        if(result.hasErrors()) {
            model.addAttribute("event", eventDto);
            return "events-create";

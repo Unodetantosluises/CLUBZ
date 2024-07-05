@@ -1,12 +1,11 @@
 package com.rungroup.web.service.impl;
 
-import com.rungroup.web.dto.RegistrationDto;
+import com.rungroup.web.dto.UserDto;
 import com.rungroup.web.models.Role;
 import com.rungroup.web.models.UserEntity;
 import com.rungroup.web.repository.RoleRepository;
 import com.rungroup.web.repository.UserRepository;
 import com.rungroup.web.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +23,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(RegistrationDto registrationDto){
+    public void saveUser(UserDto userDto){
         UserEntity user = new UserEntity();
-        user.setUsername(registrationDto.getUsername());
-        user.setName(registrationDto.getName());
-        user.setLastName(registrationDto.getLastName());
-        user.setEmail(registrationDto.getEmail());
-        user.setPassword(registrationDto.getPassword());
+        user.setUsername(userDto.getUsername());
+        user.setName(userDto.getName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
         Role role = roleRepository.findByName("USER");
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);

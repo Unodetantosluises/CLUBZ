@@ -1,8 +1,10 @@
 package com.rungroup.web.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,16 +13,16 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private Long id;
 
     @NotEmpty(message = "Username should not be empty.")
     private String username;
 
-    @NotEmpty(message = "Name should not be empty.")
     private String name;
 
-    @NotEmpty(message = "Last name should not be empty.")
     private String lastName;
 
     @NotEmpty(message = "Password should not be empty.")
@@ -29,7 +31,6 @@ public class UserDto {
     @NotEmpty(message = "Email should not be empty.")
     private String email;
 
-    @NotEmpty(message = "Profile photo should not be empty.")
     private String profilePhoto;
 
     private Boolean active;
