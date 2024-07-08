@@ -4,9 +4,13 @@ import com.rungroup.web.dto.UserDto;
 import com.rungroup.web.models.UserEntity;
 
 public interface UserService {
-    void saveUser(UserDto userDto);
+    UserEntity saveUser(UserDto userDto);
 
     UserEntity findByEmail(String email);
 
     UserEntity findByUsername(String username);
+
+    UserEntity findUserById(Long userId);
+
+    void updateUser(UserDto userDto);
 }

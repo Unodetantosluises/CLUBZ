@@ -19,7 +19,8 @@ public class AuthController {
     public AuthController(UserService userService){ this.userService = userService; }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage(Model model){
+        model.addAttribute("user", new UserDto());
         return "login";
     }
 
@@ -31,23 +32,25 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public String register(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
-        UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
+    public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+        UserEntity existingUserEmail = userService.findByEmail(userDto.getEmail());
         if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            return "redirect:/register?fail";
+            result.rejectValue("email", null, "There is already an account registered with that email.");
         }
-        UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
+
+        UserEntity existingUserUsername = userService.findByUsername(userDto.getUsername());
         if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-            return "redirect:/register?fail";
+            result.rejectValue("username", null, "There is already an account registered with that username.");
         }
-        if(result.hasErrors()){
-            model.addAttribute("user", user);
+
+        if (result.hasErrors()) {
+            model.addAttribute("user", userDto);
             return "register";
         }
-        if(user.getActive() == null) {
-            user.setActive(true);
+        if(userDto.getActive() == null) {
+            userDto.setActive(true);
         }
-        userService.saveUser(user);
+        userService.saveUser(userDto);
         return "redirect:/clubs?successes";
     }
 }

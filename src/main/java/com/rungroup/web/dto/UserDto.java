@@ -33,7 +33,7 @@ public class UserDto {
 
     private String profilePhoto;
 
-    private Boolean active;
+    private Boolean active = true;
 
     @CreationTimestamp
     private LocalDateTime createdOn;

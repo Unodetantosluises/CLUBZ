@@ -19,4 +19,20 @@ public class UserMapper {
                 .build();
         return userDto;
     }
+
+    public static UserEntity mapToUserDto(UserEntity user){
+        UserEntity userDto = UserEntity.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .name(user.getName())
+                .lastName(user.getLastName())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .profilePhoto(user.getProfilePhoto())
+                .active(user.getActive())
+                .createdOn(user.getCreatedOn())
+                .updatedOn(user.getUpdatedOn())
+                .build();
+        return userDto;
+    }
 }
