@@ -1,5 +1,6 @@
 package com.rungroup.web.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -11,11 +12,18 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private CustomUserDetailService userDetailService;
+
+    @Autowired
+    public SecurityConfig(CustomUserDetailService userDetailService){
+        this.userDetailService = userDetailService;
+    }
+
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.withUsername("user")
@@ -32,15 +40,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/login", "/register").permitAll() // Permitir acceso a las rutas de login y register
-                .anyRequest().authenticated()
-        )
+                        .requestMatchers("/login", "/register", "/home", "/clubs", "/css/**", "/js/**").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Especificar la página de login
-                        .defaultSuccessUrl("/clubs")
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
-                        .permitAll() // Permitir acceso a todos a la página de login
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll()
                 )
                 .httpBasic(Customizer.withDefaults());
 
@@ -52,3 +65,4 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
+

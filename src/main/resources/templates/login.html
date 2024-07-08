@@ -8,12 +8,12 @@
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
         <div class="col-md-6 col-m-12">
-            <!--<div th:if="${param.logout}" class="alert alert-success">
+            <div th:if="${param.logout}" class="alert alert-success">
                 You have been logged out!
             </div>
             <div th:if="${param.error}" class="alert alert-danger">
                 Invalid username and password.
-            </div> -->
+            </div>
             <div class="container px-5 my-5">
                 <form method="post" role="form" th:action="@{/login}" th:object="${user}">
                     <div class="form-row">
