@@ -1,31 +1,29 @@
 package com.rungroup.web.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.util.Collections;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private CustomUserDetailService userDetailService;
-
-    @Autowired
-    public SecurityConfig(CustomUserDetailService userDetailService){
-        this.userDetailService = userDetailService;
-    }
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.withUsername("user")
                 .password(passwordEncoder.encode("password"))
                 .roles("USER")
@@ -38,7 +36,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
         http.authorizeHttpRequests(requests -> requests
                         .requestMatchers("/login", "/register", "/home", "/clubs", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
@@ -53,11 +51,22 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login?logout=true")
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .authenticationManager(authManager);
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
+        return new ProviderManager(Collections.singletonList(
+                new DaoAuthenticationProvider() {{
+                    setUserDetailsService(userDetailsService);
+                    setPasswordEncoder(passwordEncoder);
+                }}
+        ));
     }
 
     @Bean
@@ -65,4 +74,3 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
-

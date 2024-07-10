@@ -3,6 +3,7 @@ package com.rungroup.web.controller;
 import com.rungroup.web.dto.UserDto;
 import com.rungroup.web.models.UserEntity;
 import com.rungroup.web.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,11 @@ import jakarta.validation.Valid;
 public class AuthController {
     private UserService userService;
 
+    @Autowired
     public AuthController(UserService userService){ this.userService = userService; }
 
     @GetMapping("/login")
-    public String loginPage(Model model){
-        model.addAttribute("user", new UserDto());
+    public String loginPage(){
         return "login";
     }
 
@@ -42,15 +43,14 @@ public class AuthController {
         if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
             result.rejectValue("username", null, "There is already an account registered with that username.");
         }
-
+        if(userDto.getActive() == null) {
+            userDto.setActive(true);
+        }
         if (result.hasErrors()) {
             model.addAttribute("user", userDto);
             return "register";
         }
-        if(userDto.getActive() == null) {
-            userDto.setActive(true);
-        }
         userService.saveUser(userDto);
-        return "redirect:/clubs?successes";
+        return "redirect:/home?success";
     }
 }

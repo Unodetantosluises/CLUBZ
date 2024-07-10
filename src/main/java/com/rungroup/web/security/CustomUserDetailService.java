@@ -17,23 +17,23 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    public CustomUserDetailService(UserRepository userRepository){
+    public CustomUserDetailService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findFirstByUsername(username);
-        if(user != null) {
+        /*UserEntity user = userRepository.findFirstByUsername(username);
+        if (user != null) {
             User authUser = new User(
-                    user.getEmail(),
+                    user.getUsername(), // Ensure you're using username here
                     user.getPassword(),
-                    user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName()))
+                    user.getRoles().stream()
+                            .map(role -> new SimpleGrantedAuthority(role.getName()))
                             .collect(Collectors.toList())
             );
             return authUser;
-        } else {
-            throw new UsernameNotFoundException("Invalid username or password");
+        } else {*/
+            throw new UsernameNotFoundException("Service temporarily disabled");
         }
     }
-}

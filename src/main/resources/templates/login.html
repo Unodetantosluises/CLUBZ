@@ -2,11 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bolder">LOGIN</h1>
+            <p class="lead fw-normal text-muted mb-0">Put your credentials in the next's fields</p>
+        </div>
         <div class="col-md-6 col-m-12">
             <div th:if="${param.logout}" class="alert alert-success">
                 You have been logged out!
@@ -15,7 +20,8 @@
                 Invalid username and password.
             </div>
             <div class="container px-5 my-5">
-                <form method="post" role="form" th:action="@{/login}" th:object="${user}">
+                <form method="post" th:action="@{/login}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="username">Username</label>
@@ -23,8 +29,7 @@
                                    type="text"
                                    class="form-control"
                                    placeholder="Username"
-                                   th:field="*{username}">
-                            <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
+                                   name="username">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="password">Password</label>
@@ -32,8 +37,7 @@
                                    type="password"
                                    class="form-control"
                                    placeholder="Password"
-                                   th:field="*{password}">
-                            <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+                                   name="password">
                         </div>
                     </div>
                     <button type="submit" value="Log In" class="btn btn-primary">Log In</button>
