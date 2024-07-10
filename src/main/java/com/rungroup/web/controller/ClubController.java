@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -43,13 +44,17 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/new")
-    public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto, BindingResult result, Model model) {
+    public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto, BindingResult result, Model model, RedirectAttributes attributes) {
         if(result.hasErrors()){
             model.addAttribute("club", clubDto);
             return "club-create";
+        } try {
+            clubService.saveClub(clubDto);
+            attributes.addFlashAttribute("success", "Your Club has been successfully created!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", "Something went wrong :(");
         }
-        clubService.saveClub(clubDto);
-        return "redirect:/clubs";
+        return "redirect:/clubs?success";
     }
 
     @GetMapping("/clubs/{clubId}/edit")
@@ -60,13 +65,17 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/{clubId}/edit")
-    public String updateClub(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("club") ClubDto club, BindingResult result){
+    public String updateClub(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("club") ClubDto club, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
             return "club-edit";
+        } try {
+            club.setId(clubId);
+            clubService.updateClub(club);
+            attributes.addFlashAttribute("success", "Your Club has been successfully updated!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", "Something went wrong :(");
         }
-        club.setId(clubId);
-        clubService.updateClub(club);
-        return "redirect:/clubs";
+        return "redirect:/clubs/" + clubId + "/edit";
     }
 
     @GetMapping("/clubs/{clubId}/delete")

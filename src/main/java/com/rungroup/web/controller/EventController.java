@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -38,12 +39,16 @@ public class EventController {
 
 
     @PostMapping("/events/{clubId}")
-    public String createEvent(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("event") EventDto eventDto, BindingResult result, Model model){
+    public String createEvent(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("event") EventDto eventDto, BindingResult result, Model model, RedirectAttributes attributes){
        if(result.hasErrors()) {
            model.addAttribute("event", eventDto);
            return "events-create";
-       }
-       eventService.createEvent(clubId, eventDto);
+       } try {
+            eventService.createEvent(clubId, eventDto);
+            attributes.addFlashAttribute("success", "Your event has been successfully created!");
+        } catch (Exception e){
+           attributes.addFlashAttribute("error", "Something went wrong :(");
+        }
        return "redirect:/clubs/" + clubId;
     }
 
@@ -68,16 +73,20 @@ public class EventController {
     }
 
     @PostMapping("/events/{eventId}/edit")
-    public String updatedEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute("event") EventDto event, BindingResult result, Model model) {
+    public String updatedEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute("event") EventDto event, BindingResult result, Model model, RedirectAttributes attributes) {
         if(result.hasErrors()){
             model.addAttribute("event", event);
             return "events-edit";
+        } try {
+            EventDto eventDto = eventService.findByEventId(eventId);
+            event.setId(eventId);
+            event.setClub(eventDto.getClub());
+            eventService.updateEvent(event);
+            attributes.addFlashAttribute("success", "Your event has been successfully updated!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", "Something went wrong :(");
         }
-        EventDto eventDto = eventService.findByEventId(eventId);
-        event.setId(eventId);
-        event.setClub(eventDto.getClub());
-        eventService.updateEvent(event);
-        return "redirect:/events";
+        return "redirect:/events/" + eventId + "/edit";
     }
 
     @GetMapping("/events/search")

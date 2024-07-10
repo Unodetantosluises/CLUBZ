@@ -14,6 +14,13 @@
                 <h1 class="fw-bolder">New CLUB</h1>
                 <p class="lead fw-normal text-muted mb-0">Fill the form to create a new CLUB</p>
             </div>
+            <div class="col-md-6 col-m-12">
+                <div th:if="${success}" class="alert alert-success">
+                    <p th:text="${success}"></p>
+                </div>
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
             <form role="form" method="post" th:action="@{/clubs/new}" th:object="${club}">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -49,6 +56,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
+            </div>
         </div>
     </section>
 <!-- Page Content -->
