@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ClubRepository extends JpaRepository<Club, Long> {
 
     Optional<Club> findByTitle(String url);
-    @Query("SELECT c FROM Club c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%'))")
+    @Query("SELECT c FROM Club c WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Club> searchClubs(@Param("query") String query);
 
     List<Club> findAllByOrderByCreatedOnAsc();

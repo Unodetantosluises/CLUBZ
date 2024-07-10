@@ -23,7 +23,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        /*UserEntity user = userRepository.findFirstByUsername(username);
+        UserEntity user = userRepository.findFirstByUsername(username);
         if (user != null) {
             User authUser = new User(
                     user.getUsername(), // Ensure you're using username here
@@ -33,7 +33,9 @@ public class CustomUserDetailService implements UserDetailsService {
                             .collect(Collectors.toList())
             );
             return authUser;
-        } else {*/
-            throw new UsernameNotFoundException("Service temporarily disabled");
+        } else {
+            throw new UsernameNotFoundException("Invalid username or password");
         }
     }
+}
+
